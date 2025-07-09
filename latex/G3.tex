@@ -1,0 +1,56 @@
+\section{G3: Camera calibration}
+In order to calibrate the camera it's necessary to select at least four constraints, since the zero skew camera was already a constraint itself, to get the \textbf{image of the absolute conic} (IAC). The IAC is strongly related to the calibration camera matrix K through the relation $w = (KK^T)^{-1}$:
+\begin{equation}
+    w = 
+    \begin{bmatrix}
+        \alpha^2 & 0 & -u_0\alpha^2 \\
+        0 & 1 & -v_0 \\
+        -u_0\alpha^2 & -v_0 & f_y^2 + \alpha^2u_0^2+v_0^2
+    \end{bmatrix}
+\end{equation}
+
+\subsection[Vanishing point of \textit{h} lines]{Vanishing point of $h_k$ lines}
+Applying the considerations in section \ref{sec:vanPoint_l} and selecting the $h_k$ lines from the original image, we obtain the following vanishing point:
+\begin{equation} \label{eq: vanPoint_h}
+    V_h = 
+    \begin{bmatrix}
+        0.6598 \times 10^{3} \\
+        -1.4098 \times 10^{3} \\
+        0.0010 \times 10^{3}
+    \end{bmatrix}
+\end{equation}
+
+\subsection{System of equations}
+Two constraints could be easily recovered by exploiting the metric rectify transformation matrix found previously (\ref{metricRectMatrix}), combined with the image of circular points $h_i \pm i \cdot h_2$:
+
+\begin{equation}
+    \begin{cases}
+        h_1^Twh_2 = 0 \\
+        h_1^Twh_1 - h_2^Twh_2 = 0    
+    \end{cases}
+\end{equation}
+
+The other two constraints can be obtained from the vanishing point $v$ of direction perpendicular to the vertical plane $\pi$:
+\begin{equation}
+    \begin{cases}
+        v^Twh_1 = 0 \\
+        v^Twh_2 = 0    
+    \end{cases}
+\end{equation}
+
+\subsection{Calibration matrix}
+Obtaining the calibration matrix $K$ through Cholesky Decomposition of $w=(KK^T)^{-1}$ as:
+\begin{equation} \label{eq:calibrationMatrix}
+    \begin{bmatrix}
+        f_x & 0 & u_0 \\
+        0 & f_y & 0 \\
+        0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1.4896 \times 10^{3} & 0 & 0.0015 \times 10^{3} \\
+        0 & 2.1845 \times 10^{3} & -0.0002 \times 10^{3} \\
+        0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+Where $f_x, \, f_y, \, u_0,\, v_0$ are the intrinsic parameters of the camera.
