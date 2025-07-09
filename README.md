@@ -45,6 +45,7 @@ The project was implemented entirely in **MATLAB**, using:
 ├── G1–G6/            # Geometry tasks (vanishing points, calibration, 3D model, etc.)
 ├── data/             # Input data, line coordinates, calibration data
 ├── images/           # Input and output images (rectified, labeled, etc.)
+├── latex/            # report's latex code
 ├── model3D/          # MATLAB scripts to build and render the 3D model
 ├── assignment.pdf    # Official project description
 ├── report.pdf        # Detailed report of the implementation and results
